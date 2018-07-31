@@ -213,7 +213,7 @@ import UIKit
 			if strongSelf.indicatorSizeMatchesTitle {
 				guard let string = button.titleLabel?.text else { fatalError("missing title on button, title is required for width calculation") }
 				guard let font = button.titleLabel?.font else { fatalError("missing dont on button, title is required for width calculation")  }
-				let size = string.size(attributes: [NSFontAttributeName: font])
+				let size = string.size(withAttributes: convertToOptionalNSAttributedStringKeyDictionary([convertFromNSAttributedStringKey(NSAttributedString.Key.font): font]))
 				let x = width * CGFloat(index) + ((width - size.width) / CGFloat(2))
 				strongSelf.indicatorView.frame = CGRect(x: x, y: indicatorY, width: size.width, height: strongSelf.indicatorHeight)
 			}
@@ -266,7 +266,7 @@ import UIKit
 		}
 	}
 	
-	internal func buttonSelected(sender: UIButton) {
+	@objc internal func buttonSelected(sender: UIButton) {
 		if sender.tag == selectedIndex {
 			return
 		}
@@ -293,4 +293,15 @@ import UIKit
 		}
 	}
 	
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertToOptionalNSAttributedStringKeyDictionary(_ input: [String: Any]?) -> [NSAttributedString.Key: Any]? {
+	guard let input = input else { return nil }
+	return Dictionary(uniqueKeysWithValues: input.map { key, value in (NSAttributedString.Key(rawValue: key), value)})
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertFromNSAttributedStringKey(_ input: NSAttributedString.Key) -> String {
+	return input.rawValue
 }
