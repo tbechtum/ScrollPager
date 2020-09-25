@@ -112,7 +112,7 @@
 				LastSwiftMigration = 0700;
 				LastSwiftUpdateCheck = 0700;
 				LastUpgradeCheck = 1200;
-				ORGANIZATIONNAME = "Aryan Ghassemi";
+				ORGANIZATIONNAME = "";
 				TargetAttributes = {
 					15F9717A1A9A86E400169B7E = {
 						CreatedOnToolsVersion = 6.1.1;
